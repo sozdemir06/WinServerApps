@@ -1,0 +1,12 @@
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/bin/Debug/net9.0/Shared.Messages.deps.json
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/bin/Debug/net9.0/Shared.Messages.dll
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/bin/Debug/net9.0/Shared.Messages.pdb
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.AssemblyInfoInputs.cache
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.AssemblyInfo.cs
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.csproj.CoreCompileInputs.cache
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.dll
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/refint/Shared.Messages.dll
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.pdb
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/ref/Shared.Messages.dll
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.csproj.AssemblyReference.cache

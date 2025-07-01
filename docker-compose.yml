@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: winapps
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - winapps-network
+  seq:
+    image: datalust/seq:latest
+    container_name: winapps-seq
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: Y
+    ports:
+      - "5341:5341"
+      - "9091:80"
+    volumes:
+      - seq-data:/data
+    networks:
+      - winapps-network
+  redis:
+    image: redis:7-alpine
+    container_name: winapps-redis
+    restart: unless-stopped
+    command: redis-server
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - winapps-network
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: winapps-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"   # AMQP protocol port
+      - "15672:15672" # Management UI port
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - winapps-network
+
+  
+
+volumes:
+  postgres-data:
+    name: winapps-postgres-data
+  seq-data:
+    name: winapps-seq-data
+  redis-data:
+    name: winapps-redis-data
+  rabbitmq-data:
+    name: winapps-rabbitmq-data
+
+networks:
+  winapps-network:
+    name: winapps-network
+    driver: bridge 
+

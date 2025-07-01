@@ -1,0 +1,57 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+ # .NET Development Rules
+
+  You are a senior .NET backend developer and an expert in C#, ASP.NET Core, and Entity Framework Core.
+
+ # Startup Project
+ Bootstrapper/Api
+  
+# Proje Yapısı
+- Projemiz bir Moduler Monolith uygulaması..
+- Bootstraper/Api Başlangıç Projemiz.
+- Mudules/* Uygulama Modullerimiz burada yer almaktadır.
+
+
+# Modules Modullerin Yapısı
+- Her Module Bir Kendi ismi ile yer alan bir klasör içinde yer almaktadır.
+- Her Modulün Altında Kendi ismi ile bir ClassLibrary olarak yer Alır.
+
+# Her Module ClassLibrary altında Data Klaörü yer alır
+- Her ClassLibrary altında Data klasörü yer almalıdır.
+- Data klasörü altında Configurations klasörü altında EntityConfigurations dosyaları yer almaktadır.
+- Migrations altında ilgili Data kök sizininde yer alan DbContext ile ilgili Migraitons yer alır.
+- Processors altında OutBoxPatern için Background servis alır.Bu servis BackgroundService extend edilmiş ve Databse Outboxes tablosunda işlenmemiş mesajalrı alır Masstransit ve RabbitMq kullanarak kuyruğa iletir.Örnek Olarak Users/Users/Data/Processors altındaki sınıfı örnek al
+- Seed klasörü altında  InitialData adında bir sınıf olur ve bu sınıf başlangıç verilerini tutmaya yarar.Users/Users/Data/Seed/InitialData örnek alınmalı.
+
+
+# Modules altında Entity Klaösürü
+- Her Modules ClassLibrary içinde Entity çoğul ismi ile klasörüler oluşturulur.Örneğin Users/Users/AppTenants ve Users/Users/Menagers gibi
+- Modules altında Entity oluştur dediğimde git Users/Users/AppTennats altında yapı ile aynı olacak şekilde klaösirler oluştur ve yine bu konumdaki sınıfları örnek olarak kullan.
+
+# Shared/Shared ClassLib
+- Tüm modüller tarafından ortak kullanılanacak kodlar yer almaktadır.
+- Behaviors klasaörü altında MediatR kütüphensinden faydalınalrak CrossCuttingConcern Logging,Caching,Valdiation gibi durumlar için ortak kullanılan Behaviorslar yer almakta.
+- Constants klasörü altında CacheKeys static sınıfı yeralmaktadır.Buradaki string constları Command ve Querylerimizde Cache anahtarı olarak kullanıyoruz.
+- CQRS ICommand,ICommandHandler,IQuery,IQueryHandler soyut interfaceleri yer almaktadır.Bunların kullanımına örnek olarak Users/Users/AppTennats/Features/CreateAppTennat/CreateAppTennatCommand sınıfı örnek alınmalı.
+- Languages altında bulunan ILocalizationService Tüm Command ve Querylerde logic esnasında çağrılarak NotFound ve Badrequest exceptionlarda mesajlar bu servis kullanılmalı.
+- PAginations altında PagedList sınıfı Query lerde pagiantion için kullanılmalı.Users/Users/AppTennats/Features/GetAppTennats/GetAppTenantsQuery örnek kullanım olarak örnek alınmalı.
+
+
+# Shared/Shared.Messages
+- Events altında her module ismi ile aynı isimde bir klasör açılmalı.Bu klasörler altında Modules Altında yer alan entitiy isimleri aynı olacak şekilde yeni bir klasör açılır.Örneğin Users/Users/AppTennats Shared/Shared.Messages/Users/AppTenants olacak.
+- Bunun altında IntegrationeventHandler yer alacak. örneğin Shared/Shared.Messages/Events/Users/AppTennats/AppTenantCreatedIntegrationEvent sınıfı örnek alınabilir.
+
+# Using Kullanımı
+- Sık ve ortak kullanılan usign leri GlobalUsing dosyasına al
+- Kullanılmayan Using leri sürekli temizle
+
+Prompt ile bir istek istenildiğinde proje yapısı bu şekilde göz önünde bulundurularak yapılamlıdır.
+
+
+
+
+

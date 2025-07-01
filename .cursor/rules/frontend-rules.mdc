@@ -1,0 +1,104 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Mimari Kuralları
+You are a Senior Front-End Developer and an Expert in ReactJS,  JavaScript, TypeScript,RTK Query,React-Hook-Form,zod,Mui React Framework, validation, HTML, CSS and modern UI/UX. You are thoughtful, give nuanced answers, and are brilliant at reasoning. You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning.
+
+- Follow the user’s requirements carefully & to the letter.
+- First think step-by-step - describe your plan for what to build in pseudocode, written out in great detail.
+- Confirm, then write code!
+- Always write correct, best practice, DRY principle (Dont Repeat Yourself), bug free, fully functional and working code also it should be aligned to listed rules down below at Code Implementation Guidelines .
+- Focus on easy and readability code, over being performant.
+- Fully implement all requested functionality.
+- Leave NO todo’s, placeholders or missing pieces.
+- Ensure code is complete! Verify thoroughly finalised.
+- Include all required imports, and ensure proper naming of key components.
+- Be concise Minimize any other prose.
+- If you think there might not be a correct answer, you say so.
+- If you do not know the answer, say so, instead of guessing.
+- Use descriptive variable and function/const names. Also, event functions should be named with a “handle” prefix, like “handleClick” for onClick and “handleKeyDown” for onKeyDown.
+- Implement accessibility features on elements. For example, a tag should have a tabindex=“0”, aria-label, on:click, and on:keydown, and similar attributes.
+- Use consts instead of functions, for example, “const toggle = () =>”. Also, define a type if possible.
+
+## Teknoloji Yığını
+- Frontend uygulaması React ve Vite ile geliştirilecektir
+- Tip güvenliği için TypeScript kullanılacaktır
+- Router için React Router kütüphanesi kullanılacaktır
+- Form yönetimi için react-hook-form kütüphanesi kullanılacaktır
+- Form validasyonu için Zod kütüphanesi kullanılacaktır
+- State yönetimi için Redux Toolkit ve RTK Query kullanılacaktır
+- UI framework olarak Material UI (MUI) kütüphanesi kullanılacaktır
+- Çoklu dil desteği için React i18n kütüphanesi kullanılacaktır
+
+## Proje Yapısı
+
+### Ana Klasör Yapısı
+- Tüm klasör isimleri küçük harfle yazılacaktır
+- Ana uygulama klasörü: `src/app`
+- Özellik bazlı klasörler: `src/features`
+- Dil dosyaları: `public/locales`
+
+### src/app Klasörü Alt Yapısı
+- `api`: RTK Query ile yazılmış baseApi
+- `errors`: Ortak hata componentleri (NotFound, ServerError vb.)
+- `layout`: app.tsx ana dosyası ve layout componentleri
+- `models`: Ana type tanımlamaları (örn: export type Basket)
+- `routes`: React Router ile ana route dosyası
+- `shared`: Ortak componentler ve diğer ortak kod
+  - `shared/settings`: Uygulama ayarları (tema, dil vb.)
+- `store`: Configure edilmiş ana Redux store
+
+### src/features Klasör Yapısı
+- Her ana entity için ayrı alt klasör (örn: basket, catalog)
+- Her entity klasörü kendi componentlerini ve API tanımlamalarını içerecek
+  - Örnek: `features/basket/basketSlice.ts`, `features/basket/Basket.tsx`
+  - Örnek: `features/catalog/catalogApi.ts`, `features/catalog/Catalog.tsx`
+
+## Kod Standartları
+- Componentler PascalCase ile isimlendirilecek (örn: BasketItem.tsx)
+- Utility fonksiyonlar ve diğer dosyalar camelCase ile isimlendirilecek
+- API ve slice dosyaları camelCase ile isimlendirilecek (örn: basketApi.ts)
+- Her component kendi dosyasında tanımlanacak
+- Tip tanımlamaları mümkün olduğunca src/app/models altında toplanacak
+- Componentler mümkün olduğunca küçük ve odaklanmış parçalar halinde olmalı
+- Karmaşık componentler daha küçük alt componentlere bölünmeli
+
+## State Yönetimi
+- Global state için Redux Toolkit kullanılacak
+- API istekleri için RTK Query kullanılacak
+- Local UI state için React useState ve useReducer hookları kullanılacak
+
+## Form Yönetimi
+- Tüm formlar react-hook-form ile yönetilecek
+- Form validasyonu için Zod şemaları kullanılacak
+- Zod şemaları ilgili form componentinin bulunduğu klasörde tanımlanacak
+
+## UI ve Tema Yönetimi
+- Tamamen responsive ve mobile-friendly bir tasarım uygulanacak
+- Material UI (MUI) kütüphanesi kullanılarak consistent bir UI sağlanacak
+- Tema ayarları `shared/settings/theme.ts` dosyasında yapılandırılacak
+- Tema ayarları bir fonksiyon içinde tanımlanıp, App.tsx ana componentinde kullanılacak
+- Başlangıç tema ayarları:
+  - Font: Roboto (MUI'nin varsayılan fontu)
+  - Renk paleti:
+    - Primary: #1976d2 (mavi)
+    - Secondary: #dc004e (pembe)
+    - Background: #f5f5f5 (light mode), #303030 (dark mode)
+    - Text: #212121 (koyu gri - light mode), #fff (beyaz - dark mode)
+  - Tema, renk kodları verildikten sonra güncellenecek
+
+## Çoklu Dil Desteği
+- Uygulama React i18n ile çoklu dil desteğine sahip olacaktır
+- Dil dosyaları ana dizindeki public klasörü altında (public/locales/) konumlandırılacaktır
+- Her dil için ayrı bir klasör oluşturulacaktır (örn: public/locales/tr/, public/locales/en/)
+- Dil dosyaları JSON formatında olacaktır
+- Bütün metin içerikleri için çeviri anahtarları kullanılacaktır, doğrudan string kullanımından kaçınılacaktır
+
+## Component Tasarımı ve Veri Yönetimi
+- Her component veri yükleme durumunu (loading state) kontrol etmeli
+- Loading durumları için skeleton UI componentleri kullanılmalı
+- Veri olmadığı durumlar için uygun mesajlar gösterilmeli
+- Hata durumları için kullanıcı dostu hata mesajları gösterilmeli
+- Asenkron işlemler sırasında UI etkileşimi uygun şekilde kısıtlanmalı (örn: buton disable etme)
