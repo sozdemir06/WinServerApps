@@ -3,7 +3,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Shared.Exceptions.Handler;
 
@@ -45,6 +44,12 @@ public class CustomExceptionHandler() : IExceptionHandler
           exception.Message,
           exception.GetType().Name,
           context.Response.StatusCode = StatusCodes.Status404NotFound
+      ),
+      ForbiddenException =>
+      (
+          exception.Message,
+          exception.GetType().Name,
+          context.Response.StatusCode = StatusCodes.Status403Forbidden
       ),
       _ =>
       (

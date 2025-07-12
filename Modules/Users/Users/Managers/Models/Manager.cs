@@ -45,7 +45,8 @@ public class Manager : Aggregate<Guid>
       byte[] passwordHash,
       byte[] passwordSalt,
       Guid? tenantId = null,
-      Guid? branchId = null)
+      Guid? branchId = null,
+      bool isActive = true)
   {
     ArgumentException.ThrowIfNullOrEmpty(userName);
     ArgumentException.ThrowIfNullOrEmpty(email);
@@ -64,13 +65,13 @@ public class Manager : Aggregate<Guid>
       PhoneNumber = phoneNumber,
       IsAdmin = isAdmin,
       IsManager = isManager,
-      IsActive = true,
+      IsActive = isActive,
       TenantId = tenantId,
       PasswordHash = passwordHash,
       PasswordSalt = passwordSalt,
       EmailConfirmed = false,
       SecurityStamp = Guid.NewGuid().ToString(),
-      BranchId = branchId
+      BranchId = branchId,
     };
 
     manager.AddDomainEvent(new ManagerCreatedEvent(manager));
@@ -78,6 +79,8 @@ public class Manager : Aggregate<Guid>
   }
 
   public void Update(
+      string firstName,
+      string lastName,
       string userName,
       string email,
       string phoneNumber,
@@ -90,6 +93,8 @@ public class Manager : Aggregate<Guid>
 
     UserName = userName;
     Email = email;
+    FirstName = firstName;
+    LastName = lastName;
     PhoneNumber = phoneNumber;
     IsManager = isManager;
     TenantId = tenantId;
@@ -116,13 +121,22 @@ public class Manager : Aggregate<Guid>
     AddDomainEvent(new ManagerDeactivatedEvent(this));
   }
 
-  public void Delete() 
+  public void Delete()
   {
     if (IsDeleted) return;
 
     IsDeleted = true;
 
     AddDomainEvent(new ManagerDeletedEvent(this));
+  }
+
+  public void ChangePassword(byte[] newPasswordHash, byte[] newPasswordSalt)
+  {
+    PasswordHash = newPasswordHash;
+    PasswordSalt = newPasswordSalt;
+    SecurityStamp = Guid.NewGuid().ToString();
+
+    AddDomainEvent(new ManagerPasswordChangedEvent(this));
   }
 
 

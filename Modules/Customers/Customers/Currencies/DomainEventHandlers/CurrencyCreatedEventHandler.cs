@@ -1,22 +1,28 @@
 using Customers.Currencies.DomainEvents;
-using MediatR;
+using Shared.Messages.Events.Customers.Currencies;
 
 namespace Customers.Currencies.DomainEventHandlers;
 
-public class CurrencyCreatedEventHandler : INotificationHandler<CurrencyCreatedEvent>
+public class CurrencyCreatedEventHandler(ILogger<CurrencyCreatedEventHandler> logger,IBus bus) : INotificationHandler<CurrencyCreatedEvent>
 {
-  private readonly ILogger<CurrencyCreatedEventHandler> _logger;
 
-  public CurrencyCreatedEventHandler(ILogger<CurrencyCreatedEventHandler> logger)
+  public async Task Handle(CurrencyCreatedEvent notification, CancellationToken cancellationToken)
   {
-    _logger = logger;
-  }
-
-  public Task Handle(CurrencyCreatedEvent notification, CancellationToken cancellationToken)
-  {
-    _logger.LogInformation("Currency created: {CurrencyCode} - {CurrencyName}",
+    try
+    {
+      
+      logger.LogInformation("MESSAGE [CURRENCY_CREATED] Currency created: {CurrencyCode} - {CurrencyName}",
         notification.Currency.CurrencyCode, notification.Currency.CurrencyName);
-
-    return Task.CompletedTask;
+      var message = notification.Currency.Adapt<CurrencyCreatedIntegrationEvent>();
+      if (message != null)
+      {
+        await bus.Publish(message, cancellationToken);
+      }
+    }
+    catch (Exception ex) 
+    {
+      logger.LogError(ex, "Error handling CurrencyCreatedEvent");
+    }
+    await Task.CompletedTask;
   }
 }

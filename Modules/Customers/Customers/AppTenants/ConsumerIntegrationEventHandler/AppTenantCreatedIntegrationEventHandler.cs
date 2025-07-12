@@ -1,8 +1,4 @@
-
-using Customers.AppTenants.Dtos;
 using Customers.AppTenants.Features.CreateAppTenant;
-using Mapster;
-using MediatR;
 
 namespace Customers.AppTenants.ConsumerIntegrationEventHandler;
 
@@ -27,6 +23,6 @@ public class AppTenantCreatedIntegrationEventHandler(ISender sender,ILogger<AppT
       logger.LogError(ex, "[AppTenantCreatedIntegrationEvent] error: {AppTenantId}", context.Message.Id);
      }
     
-    await Task.CompletedTask;
+    await Task.CompletedTask; 
   }
 }

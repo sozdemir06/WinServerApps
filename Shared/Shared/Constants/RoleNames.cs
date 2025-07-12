@@ -5,26 +5,16 @@ namespace Shared.Constants;
 /// </summary>
 public static class RoleNames
 {
-  /// <summary>
-  /// System administrator role with full access
-  /// </summary>
   public const string SystemAdmin = "SystemAdmin";
-
-  /// <summary>
-  /// Tenant administrator role with access to tenant management
-  /// </summary>
   public const string TenantAdmin = "TenantAdmin";
-
-
-  /// <summary>
-  /// Regular user role with basic access
-  /// </summary>
   public const string Customer = "Customer";
-
-  /// <summary>
-  /// Read-only role with limited access
-  /// </summary>
   public const string Manager = "Manager";
+  public const string BranchRead = "BranchRead";
+  public const string BranchEdit = "BranchEdit";
+  public const string BranchDelete = "BranchDelete";
+  public const string TenantManagerRead = "TenantManagerRead";
+  public const string TenantManagerEdit = "TenantManagerEdit";
+  public const string TenantManagerDelete = "TenantManagerDelete";
 
   /// <summary>
   /// Gets all predefined role names dynamically using reflection

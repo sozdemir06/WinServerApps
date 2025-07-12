@@ -28,7 +28,11 @@ public class AdminLoginCommandValidator : AbstractValidator<AdminLoginCommand>
   }
 }
 
-public class AdminLoginHandler(ILogger<AdminLoginHandler> logger, UserDbContext dbContext, IManagerTokenService managerTokenService) : ICommandHandler<AdminLoginCommand, AdminLoginResult>
+public class AdminLoginHandler(
+  ILogger<AdminLoginHandler> logger,
+  UserDbContext dbContext,
+  IManagerTokenService managerTokenService,
+  ILocalizationService localizationService) : ICommandHandler<AdminLoginCommand, AdminLoginResult>
 {
   public async Task<AdminLoginResult> Handle(AdminLoginCommand request, CancellationToken cancellationToken)
   {
@@ -42,7 +46,7 @@ public class AdminLoginHandler(ILogger<AdminLoginHandler> logger, UserDbContext 
           .FirstOrDefaultAsync(m => m.Email.ToLower() == normalizedEmail && m.IsAdmin, cancellationToken);
 
       var checkPassword = HashingHelper.VerifyPasswordHash(request.Login.Password!, manager!.PasswordHash, manager.PasswordSalt);
-      if (!checkPassword) throw new InvalidPasswordException();
+      if (!checkPassword) throw new InvalidPasswordException(await localizationService.Translate("InvalidCurrentPassword"));
 
       var token = await managerTokenService.CreateTokenAsync(manager);
 

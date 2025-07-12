@@ -7,7 +7,7 @@ using Shared.Dtos;
 
 namespace Shared.Services.Http
 {
-    public class GetManagerRoleService : IGetManagerRoleService 
+    public class GetManagerRoleService : IGetManagerRoleService
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<GetManagerRoleService> _logger;
@@ -53,14 +53,14 @@ namespace Shared.Services.Http
                 var cachedData = await _redis.StringGetAsync(cacheKey);
                 if (cachedData.HasValue)
                 {
-                    return JsonSerializer.Deserialize<IEnumerable<ManagerRoleDto>>(cachedData.ToString())??[];
+                    return JsonSerializer.Deserialize<IEnumerable<ManagerRoleDto>>(cachedData.ToString()) ?? [];
                 }
 
                 var accessToken = await _httpContextAccessor.HttpContext!.GetTokenAsync("access_token");
                 _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
 
                 // 2. HTTP isteği at
-                var endpoint = $"/api/user-roles/authorize/{Guid.Parse("019734f1-55ef-75e6-a738-e6ddc841e108")}";
+                var endpoint = $"/api/user-roles/authorize/{managerId}";
                 _logger.LogInformation("Making HTTP request to: {Endpoint}", endpoint);
 
                 var response = await _httpClient.GetFromJsonAsync<GetUserRolesForAuthorizeResult>(endpoint, cancellationToken);
@@ -81,7 +81,9 @@ namespace Shared.Services.Http
             {
                 _logger.LogError(ex, "Unexpected error occurred when getting manager roles for manager ID: {ManagerId}", managerId);
                 throw;
-            }finally{
+            }
+            finally
+            {
                 await Task.CompletedTask;
             }
         }

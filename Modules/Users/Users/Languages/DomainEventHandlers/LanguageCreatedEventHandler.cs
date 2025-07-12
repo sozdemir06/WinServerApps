@@ -1,9 +1,11 @@
+using MassTransit;
 using Microsoft.Extensions.Logging;
+using Shared.Messages.Events.Users.Languages;
 using Users.Languages.DomainEvents;
 
 namespace Users.Languages.DomainEventHandlers;
 
-public class LanguageCreatedEventHandler(ILogger<LanguageCreatedEventHandler> logger) : INotificationHandler<LanguageCreatedEvent>
+public class LanguageCreatedEventHandler(ILogger<LanguageCreatedEventHandler> logger,IBus bus) : INotificationHandler<LanguageCreatedEvent>
 {
   public async Task Handle(LanguageCreatedEvent notification, CancellationToken cancellationToken)
   {
@@ -13,14 +15,10 @@ public class LanguageCreatedEventHandler(ILogger<LanguageCreatedEventHandler> lo
         notification.Language.Name,
         notification.Language.Code);
 
-    // TODO: Implement any additional business logic for language creation
-    // For example:
-    // - Send notifications
-    // - Update related aggregates
-    // - Trigger integration events
-    // - Update cache
-    // - etc.
-
+    var language = notification.Language.Adapt<LanguageCreatedIntegrationEvent>();
+    if(language!=null){
+      await bus.Publish(language, cancellationToken); 
+    }
     await Task.CompletedTask;
   }
 }

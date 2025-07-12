@@ -43,25 +43,27 @@ public static class BranchExtensions
           branch.Email,
           branch.IsActive,
           branch.Description,
-          branch.TenantId, 
+          branch.TenantId,
           branch.CreatedBy,
           branch.ModifiedBy,
           branch.CreatedAt,
-          branch.UpdatedAt);
+          branch.UpdatedAt,
+          branch.AppTenant.ProjectAppTenantToDto());
 
   public static IQueryable<BranchDto> ProjectBranchListToDto(this IQueryable<Branch> branches) =>
-      branches.Select(b => new BranchDto(
-          b.Id,
-          b.Name,
-          b.Code,
-          b.Address,
-          b.Phone,
-          b.Email,
-          b.IsActive,
-          b.Description,
-          b.TenantId,
-          b.CreatedBy,  
-          b.ModifiedBy,
-          b.CreatedAt,
-          b.UpdatedAt));
+    branches.Select(b => new BranchDto(
+        b.Id,
+        b.Name,
+        b.Code,
+        b.Address,
+        b.Phone,
+        b.Email,
+        b.IsActive,
+        b.Description,
+        b.TenantId,
+        b.CreatedBy,
+        b.ModifiedBy,
+        b.CreatedAt,
+        b.UpdatedAt,
+        b.AppTenant.ProjectAppTenantToDto()));
 }

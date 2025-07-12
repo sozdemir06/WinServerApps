@@ -2,7 +2,7 @@ namespace Shared.Messages.Events.Users.AppTennats;
 
 public record AppTenantCreatedIntegrationEvent : IntegrationEvent
 {
-  public Guid Id { get; set; }
+                public Guid Id { get; set; }
                 public string Name { get; set; } = default!;
                 public string? Host { get; set; }
                 public string? Phone { get; set; }

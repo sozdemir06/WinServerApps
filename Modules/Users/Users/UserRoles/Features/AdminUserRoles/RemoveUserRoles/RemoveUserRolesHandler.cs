@@ -1,7 +1,4 @@
-using Users.Data;
 using Users.UserRoles.Constants;
-using Users.UserRoles.Exceptions;
-using Users.UserRoles.Models;
 
 namespace Users.UserRoles.Features.RemoveUserRoles;
 

@@ -1,6 +1,7 @@
 using Shared.Languages;
 using Shared.Services.Claims;
 using Shared.Services.Http;
+using Shared.Exceptions;
 
 namespace Shared.Behaviors
 {
@@ -26,6 +27,7 @@ namespace Shared.Behaviors
         {
             var permissionRoles = request.PermissionRoles.Select(x => x.ToUpperInvariant()).ToList();
 
+
             var userRoles = await _getManagerRoleService.GetManagerRolesAsync(_claimsPrincipalService.GetCurrentUserId(), cancellationToken) ?? [];
 
             var userRolesNames = userRoles.Select(x => x.Name.ToUpperInvariant()).ToList() ?? [];
@@ -35,7 +37,7 @@ namespace Shared.Behaviors
             {
                 return await next(cancellationToken);
             }
-            throw new UnauthorizedAccessException(await _localizationService.Translate("Unauthorized"));
+            throw new ForbiddenException(await _localizationService.Translate("Forbidden"));
 
         }
     }

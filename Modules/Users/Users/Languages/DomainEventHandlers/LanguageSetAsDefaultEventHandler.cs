@@ -20,6 +20,6 @@ public class LanguageSetAsDefaultEventHandler(ILogger<LanguageSetAsDefaultEventH
     // - Update cache
     // - etc.
 
-    await Task.CompletedTask;
+    await Task.CompletedTask; 
   }
 }

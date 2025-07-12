@@ -25,6 +25,7 @@ public class GetBranchesHandler : IQueryHandler<GetBranchesQuery, GetBranchesRes
   public async Task<GetBranchesResult> Handle(GetBranchesQuery request, CancellationToken cancellationToken)
   {
     var query = _context.Branches
+        .Include(x=>x.AppTenant)
         .IgnoreQueryFilters()
         .Where(x => !x.IsDeleted)
         .AsNoTracking()

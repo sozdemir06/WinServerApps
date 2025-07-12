@@ -15,7 +15,10 @@ public record ManagerDto(
     bool IsActive,
     Guid? TenantId,
     Guid? BranchId,
+    DateTime CreatedAt,
     string? Password = null,
     string? BranchName = null,
-    List<UserRoleDto>? UserRoles = null);
+    string? TenantName = null,
+    List<UserRoleDto>? UserRoles = null
+    );
 

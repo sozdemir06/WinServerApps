@@ -13,5 +13,7 @@ public record BranchDto(
     string? CreatedBy,
     string? ModifiedBy,
     DateTime CreatedAt,
-    DateTime? UpdatedAt
+    DateTime? UpdatedAt,
+    AppTenantDto AppTenant
+    
 );

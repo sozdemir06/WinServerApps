@@ -1,6 +1,5 @@
 using FastEndpoints;
 using WinApps.Modules.Users.Users.Branches.Dtos;
-using WinApps.Modules.Users.Users.Branches.Features.GetBranches;
 using WinApps.Modules.Users.Users.Branches.QueryParams;
 
 namespace WinApps.Modules.Users.Users.Branches.Features.GetBranches;

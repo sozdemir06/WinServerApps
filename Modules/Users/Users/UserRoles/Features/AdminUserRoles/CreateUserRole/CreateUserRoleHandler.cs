@@ -1,4 +1,3 @@
-using Users.Data;
 using Users.UserRoles.Constants;
 using Users.UserRoles.Dtos;
 using Users.UserRoles.Exceptions;

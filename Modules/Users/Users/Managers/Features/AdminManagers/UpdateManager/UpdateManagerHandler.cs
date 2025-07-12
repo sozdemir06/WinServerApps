@@ -118,6 +118,8 @@ public class UpdateManagerHandler(
     try
     {
       manager.Update(
+          request.Manager.FirstName,
+          request.Manager.LastName,
           request.Manager.UserName,
           request.Manager.Email,
           request.Manager.PhoneNumber ?? string.Empty,

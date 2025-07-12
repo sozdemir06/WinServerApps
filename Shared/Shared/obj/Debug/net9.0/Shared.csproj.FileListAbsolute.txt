@@ -14,3 +14,4 @@
 /Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared/obj/Debug/net9.0/Shared.genruntimeconfig.cache
 /Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared/bin/Debug/net9.0/Languages/Localization/en.json
 /Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared/bin/Debug/net9.0/Languages/Localization/tr.json
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared/obj/Debug/net9.0/Shared.sourcelink.json

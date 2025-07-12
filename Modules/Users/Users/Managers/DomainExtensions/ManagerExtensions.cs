@@ -11,7 +11,7 @@ public static class ManagerExtensions
   {
     return new ManagerDto(
       manager.Id,
-      manager.FirstName,
+      manager.FirstName, 
       manager.LastName,
       manager.UserName,
       manager.Email,
@@ -22,7 +22,7 @@ public static class ManagerExtensions
       manager.IsActive,
       manager.TenantId,
       manager.BranchId,
-      null
+      manager.CreatedAt
     );
   }
 
@@ -41,8 +41,10 @@ public static class ManagerExtensions
       m.IsActive,
       m.TenantId,
       m.BranchId,
+      m.CreatedAt,
       null,
       m.Branch!.Name,
+      m.Tenant!.Name,
       m.UserRoles.Select(x => new UserRoleDto(x.Id, x.ManagerId, x.RoleId, x.IsActive)).ToList()
     ));
   }

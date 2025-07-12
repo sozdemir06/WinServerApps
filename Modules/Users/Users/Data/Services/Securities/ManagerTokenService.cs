@@ -53,7 +53,7 @@ namespace Users.Data.Services.Securities
         SigningCredentials = creds,
         Issuer = _issuer,
         Audience = _audience,
-
+        
 
       };
 

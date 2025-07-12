@@ -20,3 +20,4 @@
 /Users/sozdemir/Desktop/Projects/WinApps/Modules/Customers/Customers/bin/Debug/net9.0/RegionJson/Cities.json
 /Users/sozdemir/Desktop/Projects/WinApps/Modules/Customers/Customers/bin/Debug/net9.0/RegionJson/Countries.json
 /Users/sozdemir/Desktop/Projects/WinApps/Modules/Customers/Customers/bin/Debug/net9.0/RegionJson/Districts.json
+/Users/sozdemir/Desktop/Projects/WinApps/Modules/Customers/Customers/obj/Debug/net9.0/Customers.sourcelink.json

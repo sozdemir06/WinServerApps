@@ -2,7 +2,7 @@ using Users.Managers.DomainExtensions;
 using Users.Managers.Dtos;
 using Users.Managers.QueryParams;
 
-namespace Users.Managers.Features.AdminManagers.GetManager;
+namespace Users.Managers.Features.AdminManagers.GetManager; 
 
 public record GetManagersQuery(ManagerParams? Params = null) : IQuery<GetManagersResult>, ICachableRequest
 {
@@ -20,8 +20,9 @@ public class GetManagersHandler(UserDbContext dbContext) : IQueryHandler<GetMana
     var parameters = request.Params ?? new ManagerParams();
 
     var query = dbContext.Managers
+        .Include(x=>x.Tenant)
         .Include(x=>x.Branch)
-        .Include(x=>x.UserRoles)
+        .Include(x=>x.UserRoles)  
         .IgnoreQueryFilters()
         .AsNoTracking()
         .ApplyQueryParams(parameters);

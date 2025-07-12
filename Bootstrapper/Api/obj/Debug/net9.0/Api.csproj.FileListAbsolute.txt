@@ -190,3 +190,4 @@
 /Users/sozdemir/Desktop/Projects/WinApps/Bootstrapper/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/sozdemir/Desktop/Projects/WinApps/Bootstrapper/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
 /Users/sozdemir/Desktop/Projects/WinApps/Bootstrapper/Api/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/sozdemir/Desktop/Projects/WinApps/Bootstrapper/Api/obj/Debug/net9.0/Api.sourcelink.json

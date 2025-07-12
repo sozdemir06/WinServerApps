@@ -10,3 +10,4 @@
 /Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.pdb
 /Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/ref/Shared.Messages.dll
 /Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.csproj.AssemblyReference.cache
+/Users/sozdemir/Desktop/Projects/WinApps/Shared/Shared.Messages/obj/Debug/net9.0/Shared.Messages.sourcelink.json

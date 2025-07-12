@@ -10,6 +10,7 @@ public static class CacheKeys
   /// </summary>
   public const string AppTenants = "AppTenants";
   public const string Branches = "Branches";
+  public const string TenantBranches = "TenantBranches";
   public const string Countries = "Countries";
   public const string Cities = "Cities";
   public const string City = "City";
@@ -20,5 +21,8 @@ public static class CacheKeys
   public const string UserRoles = "UserRoles";
   public const string Languages = "Languages";
   public const string Managers = "Managers";
+  public const string TenantManagers = "TenantManagers";
   public const string RoleGroups = "RoleGroups";
+  public const string AdminCategories = "AdminCategories";
+  public const string TenantCategories = "TenantCategories";
 }

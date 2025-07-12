@@ -1,11 +1,13 @@
+using MassTransit;
 using Microsoft.Extensions.Logging;
+using Shared.Messages.Events.Users.Languages;
 using Users.Languages.DomainEvents;
 
-namespace Users.Languages.DomainEventHandlers;
+namespace Users.Languages.DomainEventHandlers; 
 
-public class LanguageUpdatedEventHandler(ILogger<LanguageUpdatedEventHandler> logger) : INotificationHandler<LanguageUpdatedEvent>
+public class LanguageUpdatedEventHandler(ILogger<LanguageUpdatedEventHandler> logger,IBus bus) : INotificationHandler<LanguageUpdatedEvent>
 {
-  public async Task Handle(LanguageUpdatedEvent notification, CancellationToken cancellationToken)
+  public async Task Handle(LanguageUpdatedEvent notification, CancellationToken cancellationToken) 
   {
     logger.LogInformation(
         "LanguageUpdatedEvent handled => LanguageId: {LanguageId}, Name: {LanguageName}, Code: {LanguageCode}",
@@ -13,14 +15,10 @@ public class LanguageUpdatedEventHandler(ILogger<LanguageUpdatedEventHandler> lo
         notification.Language.Name,
         notification.Language.Code);
 
-    // TODO: Implement any additional business logic for language update
-    // For example:
-    // - Send notifications
-    // - Update related aggregates
-    // - Trigger integration events
-    // - Update cache
-    // - etc.
-
+    var language = notification.Language.Adapt<LanguageUpdatedIntegrationEvent>();
+    if(language!=null){
+      await bus.Publish(language, cancellationToken);
+    }
     await Task.CompletedTask;
   }
 }
