@@ -51,6 +51,9 @@ alwaysApply: true
 
 Prompt ile bir istek istenildiğinde proje yapısı bu şekilde göz önünde bulundurularak yapılamlıdır.
 
+# DTOs
+- DTO lar her zaman record type olsun
+
 
 
 

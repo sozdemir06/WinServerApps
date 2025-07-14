@@ -29,7 +29,7 @@ public class DeleteAdminCategoryHandler(CatalogDbContext context) : ICommandHand
     }
 
     context.AdminCategories.Remove(category);
-    await context.SaveChangesAsync(cancellationToken);
+    await context.SaveChangesAsync(cancellationToken); 
 
     return new DeleteAdminCategoryResult(true);
   }

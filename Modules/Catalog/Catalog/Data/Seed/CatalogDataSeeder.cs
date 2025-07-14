@@ -22,6 +22,19 @@ public class CatalogDataSeeder(CatalogDbContext _dbContext) : IDataSeeder
     //   await _dbContext.Currencies.AddRangeAsync(InitialData.GetCurrencies(), cancellationToken);
     //   await _dbContext.SaveChangesAsync(cancellationToken);
     // }
+
+    // if (!await _dbContext.AppUnits.AnyAsync(cancellationToken))
+    // {
+    //   await _dbContext.AppUnits.AddRangeAsync(InitialData.GetAppUnits(), cancellationToken);
+    //   await _dbContext.SaveChangesAsync(cancellationToken);
+    // }
+
+    // if (!await _dbContext.AppUnitTranslates.AnyAsync(cancellationToken))
+    // {
+    //   await _dbContext.AppUnitTranslates.AddRangeAsync(InitialData.GetAppUnitTranslates(), cancellationToken);
+    //   await _dbContext.SaveChangesAsync(cancellationToken);
+    // }
+
     await _dbContext.Database.EnsureCreatedAsync(cancellationToken);
   }
 }

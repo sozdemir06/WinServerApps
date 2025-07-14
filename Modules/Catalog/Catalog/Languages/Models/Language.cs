@@ -1,3 +1,4 @@
+using Catalog.AppUnits.Models;
 using Shared.DDD;
 
 namespace Catalog.Languages.Models;
@@ -11,6 +12,7 @@ public class Language : Entity<Guid>
     public bool IsActive { get; private set; }
     public ICollection<CategoryTranslate> CategoryTranslates { get; set; } = [];
     public ICollection<TenantCategoryTranslate> TenantCategoryTranslates { get; set; } = [];
+    public ICollection<AppUnitTranslate> AppUnitTranslates { get; set; } = [];
 
     private Language() { } // For EF Core
 

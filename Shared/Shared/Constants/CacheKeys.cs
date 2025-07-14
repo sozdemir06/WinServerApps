@@ -25,4 +25,6 @@ public static class CacheKeys
   public const string RoleGroups = "RoleGroups";
   public const string AdminCategories = "AdminCategories";
   public const string TenantCategories = "TenantCategories";
+  public const string AdminAppUnits = "AdminAppUnits";
+  public const string TenantAppUnits = "TenantAppUnits";
 }

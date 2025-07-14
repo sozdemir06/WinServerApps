@@ -1,5 +1,4 @@
 using System.Reflection;
-using Catalog.Data;
 using Catalog.Data.Processors;
 using Catalog.Data.Seed;
 using Shared.Data.Extensions;

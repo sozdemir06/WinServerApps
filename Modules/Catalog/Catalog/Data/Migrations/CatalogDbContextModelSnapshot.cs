@@ -108,6 +108,102 @@ namespace Catalog.Data.Migrations
                     b.ToTable("AppTenants", "catalog");
                 });
 
+            modelBuilder.Entity("Catalog.AppUnits.Models.AppUnit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDefault")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("MeasureUnitType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("None");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("RowVersion")
+                        .HasColumnType("bytea");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUnits", "catalog");
+                });
+
+            modelBuilder.Entity("Catalog.AppUnits.Models.AppUnitTranslate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("LanguageId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .HasColumnType("bytea");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("UnitId");
+
+                    b.HasIndex("UnitId", "LanguageId")
+                        .IsUnique();
+
+                    b.ToTable("AppUnitTranslates", "catalog");
+                });
+
             modelBuilder.Entity("Catalog.Categories.Models.AdminCategory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -449,6 +545,25 @@ namespace Catalog.Data.Migrations
                     b.ToTable("OutboxMessages", "catalog");
                 });
 
+            modelBuilder.Entity("Catalog.AppUnits.Models.AppUnitTranslate", b =>
+                {
+                    b.HasOne("Catalog.Languages.Models.Language", "Language")
+                        .WithMany("AppUnitTranslates")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Catalog.AppUnits.Models.AppUnit", "Unit")
+                        .WithMany("Translates")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+
+                    b.Navigation("Unit");
+                });
+
             modelBuilder.Entity("Catalog.Categories.Models.AdminCategory", b =>
                 {
                     b.HasOne("Catalog.Categories.Models.AdminCategory", "Parent")
@@ -514,6 +629,11 @@ namespace Catalog.Data.Migrations
                     b.Navigation("TenantCategories");
                 });
 
+            modelBuilder.Entity("Catalog.AppUnits.Models.AppUnit", b =>
+                {
+                    b.Navigation("Translates");
+                });
+
             modelBuilder.Entity("Catalog.Categories.Models.AdminCategory", b =>
                 {
                     b.Navigation("Children");
@@ -530,6 +650,8 @@ namespace Catalog.Data.Migrations
 
             modelBuilder.Entity("Catalog.Languages.Models.Language", b =>
                 {
+                    b.Navigation("AppUnitTranslates");
+
                     b.Navigation("CategoryTranslates");
 
                     b.Navigation("TenantCategoryTranslates");

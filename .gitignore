@@ -248,6 +248,83 @@ orleans.codegen.cs
 
 # Including strong name files can present a security risk
 # (https://github.com/github/gitignore/pull/2483#issue-259490424)
+
+# Additional .NET specific ignores
+*.dll
+*.exe
+*.pdb
+*.ipdb
+*.dll.config
+*.exe.config
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Test results
+TestResults/
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Coverage reports
+*.coverage
+*.coveragexml
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Certificate files
+*.pfx
+*.p12
+*.key
+*.crt
+*.cer
+
+# Configuration overrides
+appsettings.*.json
+!appsettings.json
+!appsettings.Example.json
 #*.snk
 
 # Since there are multiple workflows, uncomment next line to ignore bower_components
