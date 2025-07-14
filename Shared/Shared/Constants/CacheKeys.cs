@@ -27,4 +27,6 @@ public static class CacheKeys
   public const string TenantCategories = "TenantCategories";
   public const string AdminAppUnits = "AdminAppUnits";
   public const string TenantAppUnits = "TenantAppUnits";
+  public const string AdminExpensePens = "AdminExpensePens";
+  public const string TenantExpensePens = "TenantExpensePens";
 }

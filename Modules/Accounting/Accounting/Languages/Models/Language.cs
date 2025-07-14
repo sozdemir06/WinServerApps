@@ -1,3 +1,4 @@
+using Accounting.ExpensePens.Models;
 using Shared.DDD;
 
 namespace Accounting.Languages.Models;
@@ -9,6 +10,8 @@ public class Language : Entity<Guid>
   public string? Description { get; private set; }
   public bool IsDefault { get; private set; }
   public bool IsActive { get; private set; }
+
+  public ICollection<ExpensePenTranslate> ExpensePenTranslates { get; private set; } = [];
 
   private Language() { } // For EF Core
 

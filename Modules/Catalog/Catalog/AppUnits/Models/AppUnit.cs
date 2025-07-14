@@ -33,7 +33,6 @@ public class AppUnit : Aggregate<Guid>
   {
     MeasureUnitType = measureUnitType;
     IsActive = isActive;
-    UpdatedAt = DateTime.UtcNow;
   }
 
   public void Activate()
@@ -42,19 +41,16 @@ public class AppUnit : Aggregate<Guid>
       throw new InvalidOperationException("AppUnit is already active.");
 
     IsActive = true;
-    UpdatedAt = DateTime.UtcNow;
   }
 
   public void SetAsDefault()
   {
     IsDefault = true;
-    UpdatedAt = DateTime.UtcNow;
   }
 
   public void UnsetAsDefault()
   {
     IsDefault = false;
-    UpdatedAt = DateTime.UtcNow;
   }
 
   public void Deactivate()
@@ -63,34 +59,7 @@ public class AppUnit : Aggregate<Guid>
       throw new InvalidOperationException("AppUnit is already inactive.");
 
     IsActive = false;
-    UpdatedAt = DateTime.UtcNow;
-    IsDeleted = true;
+    IsDeleted = true; 
   }
 
-  // Translate ekleme metodu
-  internal void AddTranslation(string name, string? description, Guid? languageId)
-  {
-    var translation = AppUnitTranslate.Create(name, description, languageId, Id);
-    Translates.Add(translation);
-  }
-
-  // Translate güncelleme metodu
-  internal void UpdateTranslation(Guid translationId, string name, string? description)
-  {
-    var translation = Translates.FirstOrDefault(t => t.Id == translationId);
-    if (translation != null)
-    {
-      translation.UpdateDetails(name, description);
-    }
-  }
-
-  // Translate silme metodu
-  internal void RemoveTranslation(Guid translationId)
-  {
-    var translation = Translates.FirstOrDefault(t => t.Id == translationId);
-    if (translation != null)
-    {
-      Translates.Remove(translation);
-    }
-  }
 }
