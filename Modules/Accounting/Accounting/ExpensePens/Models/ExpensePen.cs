@@ -54,7 +54,7 @@ public class ExpensePen : Aggregate<Guid>
     {
 
         IsActive = false;
-        IsDeleted = true;
+        IsDeleted = true; 
     }
 
     // Translate ekleme metodu
