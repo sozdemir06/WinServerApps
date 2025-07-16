@@ -3,6 +3,7 @@ using System;
 using Accounting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Accounting.Data.Migrations
 {
     [DbContext(typeof(AccountingDbContext))]
-    partial class AccountingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250716075040_AddTaxGroupAndTax")]
+    partial class AddTaxGroupAndTax
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -356,6 +359,10 @@ namespace Accounting.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsActive");
+
+                    b.HasIndex("IsDefault");
+
                     b.ToTable("TaxGroups", "accounting");
                 });
 
@@ -442,9 +449,6 @@ namespace Accounting.Data.Migrations
                     b.Property<byte[]>("RowVersion")
                         .HasColumnType("bytea");
 
-                    b.Property<Guid>("TaxGroupId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -455,8 +459,6 @@ namespace Accounting.Data.Migrations
                     b.HasIndex("IsDefault");
 
                     b.HasIndex("Rate");
-
-                    b.HasIndex("TaxGroupId");
 
                     b.ToTable("Taxes", "accounting");
                 });
@@ -576,17 +578,6 @@ namespace Accounting.Data.Migrations
                     b.Navigation("TaxGroup");
                 });
 
-            modelBuilder.Entity("Accounting.Taxes.Models.Tax", b =>
-                {
-                    b.HasOne("Accounting.TaxGroups.Models.TaxGroup", "TaxGroup")
-                        .WithMany("Taxes")
-                        .HasForeignKey("TaxGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TaxGroup");
-                });
-
             modelBuilder.Entity("Accounting.Taxes.Models.TaxTranslate", b =>
                 {
                     b.HasOne("Accounting.Languages.Models.Language", "Language")
@@ -622,8 +613,6 @@ namespace Accounting.Data.Migrations
             modelBuilder.Entity("Accounting.TaxGroups.Models.TaxGroup", b =>
                 {
                     b.Navigation("TaxGroupTranslates");
-
-                    b.Navigation("Taxes");
                 });
 
             modelBuilder.Entity("Accounting.Taxes.Models.Tax", b =>

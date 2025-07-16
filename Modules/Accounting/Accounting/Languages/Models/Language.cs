@@ -1,4 +1,6 @@
 using Accounting.ExpensePens.Models;
+using Accounting.Taxes.Models;
+using Accounting.TaxGroups.Models;
 using Shared.DDD;
 
 namespace Accounting.Languages.Models;
@@ -12,6 +14,8 @@ public class Language : Entity<Guid>
   public bool IsActive { get; private set; }
 
   public ICollection<ExpensePenTranslate> ExpensePenTranslates { get; private set; } = [];
+  public ICollection<TaxGroupTranslate> TaxGroupTranslates { get; private set; } = [];
+  public ICollection<TaxTranslate> TaxTranslates { get; private set; } = [];
 
   private Language() { } // For EF Core
 

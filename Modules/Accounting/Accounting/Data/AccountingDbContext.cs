@@ -2,6 +2,8 @@ using System.Reflection;
 using Accounting.Currencies.Models;
 using Accounting.ExpensePens.Models;
 using Accounting.Languages.Models;
+using Accounting.Taxes.Models;
+using Accounting.TaxGroups.Models;
 
 
 namespace Accounting.Data;
@@ -13,6 +15,10 @@ public class AccountingDbContext(DbContextOptions<AccountingDbContext> options) 
   public DbSet<Currency> Currencies => Set<Currency>();
   public DbSet<ExpensePen> ExpensePens => Set<ExpensePen>();
   public DbSet<ExpensePenTranslate> ExpensePenTranslates => Set<ExpensePenTranslate>();
+  public DbSet<TaxGroup> TaxGroups => Set<TaxGroup>();
+  public DbSet<TaxGroupTranslate> TaxGroupTranslates => Set<TaxGroupTranslate>();
+  public DbSet<Tax> Taxes => Set<Tax>();
+  public DbSet<TaxTranslate> TaxTranslates => Set<TaxTranslate>();
   public DbSet<Language> Languages => Set<Language>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,5 +29,9 @@ public class AccountingDbContext(DbContextOptions<AccountingDbContext> options) 
 
     modelBuilder.Entity<ExpensePen>().HasQueryFilter(x => !x.IsDeleted);
     modelBuilder.Entity<ExpensePenTranslate>().HasQueryFilter(x => !x.IsDeleted);
+    modelBuilder.Entity<TaxGroup>().HasQueryFilter(x => !x.IsDeleted);
+    modelBuilder.Entity<TaxGroupTranslate>().HasQueryFilter(x => !x.IsDeleted);
+    modelBuilder.Entity<Tax>().HasQueryFilter(x => !x.IsDeleted);
+    modelBuilder.Entity<TaxTranslate>().HasQueryFilter(x => !x.IsDeleted);
   }
 }
