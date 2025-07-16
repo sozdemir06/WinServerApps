@@ -7,5 +7,6 @@ namespace Shared.Services.Http
     Task<ExchangeRateResponseDto> GetExchangeRatesAsync(CancellationToken cancellationToken = default);
     Task<ExchangeRateDto?> GetExchangeRateByCurrencyAsync(string currencyCode, CancellationToken cancellationToken = default);
     Task<decimal> ConvertCurrencyAsync(string fromCurrency, string toCurrency, decimal amount, CancellationToken cancellationToken = default);
+    string GetCurrencySymbol(string currencyCode);
   }
 }

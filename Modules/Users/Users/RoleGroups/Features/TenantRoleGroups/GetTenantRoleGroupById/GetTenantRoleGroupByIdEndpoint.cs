@@ -1,4 +1,5 @@
 using FastEndpoints;
+using Shared.Services.Claims;
 using Users.RoleGroups.Dtos;
 
 namespace Users.RoleGroups.Features.TenantRoleGroups.GetTenantRoleGroupById;
@@ -6,7 +7,7 @@ namespace Users.RoleGroups.Features.TenantRoleGroups.GetTenantRoleGroupById;
 public record GetTenantRoleGroupByIdRequest(Guid Id);
 public record GetTenantRoleGroupByIdResponse(RoleGroupDto RoleGroup);
 
-public class GetTenantRoleGroupByIdEndpoint(ISender sender) : Endpoint<GetTenantRoleGroupByIdRequest, GetTenantRoleGroupByIdResponse>
+public class GetTenantRoleGroupByIdEndpoint(ISender sender,IClaimsPrincipalService claimsPrincipalService) : Endpoint<GetTenantRoleGroupByIdRequest, GetTenantRoleGroupByIdResponse>
 {
   public override void Configure()
   {
@@ -22,7 +23,8 @@ public class GetTenantRoleGroupByIdEndpoint(ISender sender) : Endpoint<GetTenant
 
   public override async Task HandleAsync(GetTenantRoleGroupByIdRequest request, CancellationToken ct)
   {
-    var query = new GetTenantRoleGroupByIdQuery(request.Id);
+    var tenantId = claimsPrincipalService.GetCurrentTenantId();
+    var query = new GetTenantRoleGroupByIdQuery(request.Id, tenantId);
     var result = await sender.Send(query, ct);
 
     await SendAsync(new GetTenantRoleGroupByIdResponse(result.RoleGroup), StatusCodes.Status200OK, ct);

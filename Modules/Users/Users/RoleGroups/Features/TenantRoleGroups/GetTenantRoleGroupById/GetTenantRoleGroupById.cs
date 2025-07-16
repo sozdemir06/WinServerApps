@@ -5,9 +5,9 @@ using Users.RoleGroups.Exceptions;
 
 namespace Users.RoleGroups.Features.TenantRoleGroups.GetTenantRoleGroupById;
 
-public record GetTenantRoleGroupByIdQuery(Guid Id) : IQuery<GetTenantRoleGroupByIdResult>, ICachableRequest
+public record GetTenantRoleGroupByIdQuery(Guid Id, Guid? TenantId = null) : IQuery<GetTenantRoleGroupByIdResult>, ICachableRequest
 {
-  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.RoleGroups, Id);
+  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.RoleGroups, Id, TenantId!);
   public string CacheGroupKey => CacheKeys.RoleGroups;
   public TimeSpan? CacheExpiration => null;
 }

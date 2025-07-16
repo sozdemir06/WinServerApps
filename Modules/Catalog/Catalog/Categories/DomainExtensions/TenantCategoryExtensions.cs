@@ -1,5 +1,4 @@
 using Catalog.AppTenants.DomainExtensions;
-using Catalog.Categories.Models;
 using WinApps.Modules.Catalog.Catalog.Categories.Dtos;
 using WinApps.Modules.Catalog.Catalog.Categories.QueryParams;
 
@@ -53,11 +52,10 @@ public static class TenantCategoryExtensions
           category.Parent?.ProjectTenantCategoryToDto(),
           category.Children.Select(c => c.ProjectTenantCategoryToDto()).ToList(),
           category.Translates.Select(t => new TenantCategoryTranslateDto(
-                t.Id,
+                t.LanguageId,
                 t.Name,
                 t.Description,
-                t.LanguageId,
-                t.CategoryId)).ToList(),
+                t.Language!.Code)).ToList(),
           category.CreatedBy,
           category.ModifiedBy,
           category.CreatedAt,
@@ -79,11 +77,10 @@ public static class TenantCategoryExtensions
               null,
               new List<TenantCategoryDto>(),
               c.Parent.Translates.Select(t => new TenantCategoryTranslateDto(
-                  t.Id,
+                  t.LanguageId,
                   t.Name,
                   t.Description,
-                  t.LanguageId,
-                  t.CategoryId)).ToList(),
+                  t.Language!.Code)).ToList(),
               c.Parent.CreatedBy,
               c.Parent.ModifiedBy,
               c.Parent.CreatedAt,
@@ -102,11 +99,10 @@ public static class TenantCategoryExtensions
               ch.CreatedAt,
               ch.UpdatedAt)).ToList(),
           c.Translates.Select(t => new TenantCategoryTranslateDto(
-              t.Id,
+              t.LanguageId,
               t.Name,
               t.Description,
-              t.LanguageId,
-              t.CategoryId)).ToList(),
+              t.Language!.Code)).ToList(),
           c.CreatedBy,
           c.ModifiedBy,
           c.CreatedAt,

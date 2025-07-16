@@ -4,9 +4,9 @@ using Users.Managers.Exceptions;
 
 namespace Users.Managers.Features.TenantManagers.GetTenantManager;
 
-public record GetTenantManagerByIdQuery(Guid Id) : IQuery<GetTenantManagerByIdResult>, ICachableRequest,IAuthorizeRequest
+public record GetTenantManagerByIdQuery(Guid Id, Guid? TenantId = null) : IQuery<GetTenantManagerByIdResult>, ICachableRequest,IAuthorizeRequest
 {
-  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.TenantManagers, Id);
+  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.TenantManagers, Id, TenantId!);
   public string CacheGroupKey => CacheKeys.TenantManagers;
   public TimeSpan? CacheExpiration => null;
 

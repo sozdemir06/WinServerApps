@@ -8,6 +8,7 @@ namespace Shared.Dtos
     public decimal ForexSelling { get; set; }
     public decimal BanknoteBuying { get; set; }
     public decimal BanknoteSelling { get; set; }
+    public string? CurrencySymbol { get; set; }
     public DateTime Date { get; set; }
   }
 

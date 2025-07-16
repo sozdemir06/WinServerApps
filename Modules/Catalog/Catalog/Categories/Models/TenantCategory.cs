@@ -1,5 +1,4 @@
 using Catalog.AppTenants.Models;
-using Shared.DDD;
 using WinApps.Modules.Catalog.Catalog.Categories.DomainEvents;
 using WinApps.Modules.Catalog.Catalog.Categories.Dtos;
 

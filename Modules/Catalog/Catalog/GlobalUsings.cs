@@ -24,3 +24,4 @@ global using Catalog.Categories.Models;
 global using Microsoft.AspNetCore.Http;
 global using Shared.Pagination;
 global using Shared.DDD;
+global using Shared.Services.Claims;

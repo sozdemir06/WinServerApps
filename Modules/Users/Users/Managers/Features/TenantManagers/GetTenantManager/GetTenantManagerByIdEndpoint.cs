@@ -1,4 +1,5 @@
 using FastEndpoints;
+using Shared.Services.Claims;
 using Users.Managers.Dtos;
 
 namespace Users.Managers.Features.TenantManagers.GetTenantManager;
@@ -6,7 +7,7 @@ namespace Users.Managers.Features.TenantManagers.GetTenantManager;
 public record GetTenantManagerByIdRequest(Guid Id);
 public record GetTenantManagerByIdResponse(ManagerDto Manager);
 
-public class GetTenantManagerByIdEndpoint(ISender sender) : Endpoint<GetTenantManagerByIdRequest, GetTenantManagerByIdResponse>
+public class GetTenantManagerByIdEndpoint(ISender sender,IClaimsPrincipalService claimsPrincipalService) : Endpoint<GetTenantManagerByIdRequest, GetTenantManagerByIdResponse>
 {
   public override void Configure()
   {
@@ -22,7 +23,8 @@ public class GetTenantManagerByIdEndpoint(ISender sender) : Endpoint<GetTenantMa
 
   public override async Task HandleAsync(GetTenantManagerByIdRequest request, CancellationToken ct)
   {
-    var query = new GetTenantManagerByIdQuery(request.Id);
+    var tenantId = claimsPrincipalService.GetCurrentTenantId();
+    var query = new GetTenantManagerByIdQuery(request.Id, tenantId);
     var result = await sender.Send(query, ct);
 
     await SendAsync(new GetTenantManagerByIdResponse(result.Manager), StatusCodes.Status200OK, ct);

@@ -4,9 +4,9 @@ using Users.Managers.QueryParams;
 
 namespace Users.Managers.Features.TenantManagers.GetTenantManager;
 
-public record GetTenantManagersQuery(ManagerParams? Params = null) : IQuery<GetTenantManagersResult>, ICachableRequest,IAuthorizeRequest
+public record GetTenantManagersQuery(ManagerParams? Params = null, Guid? TenantId = null) : IQuery<GetTenantManagersResult>, ICachableRequest,IAuthorizeRequest
 {
-  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.TenantManagers, Params ?? new ManagerParams());
+  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.TenantManagers, Params ?? new ManagerParams(), TenantId!);
   public string CacheGroupKey => CacheKeys.TenantManagers;
   public TimeSpan? CacheExpiration => null;
 

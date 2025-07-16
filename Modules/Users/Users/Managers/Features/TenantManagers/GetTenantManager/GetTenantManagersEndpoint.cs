@@ -1,4 +1,5 @@
 using FastEndpoints;
+using Shared.Services.Claims;
 using Users.Managers.Dtos;
 using Users.Managers.QueryParams;
 
@@ -7,7 +8,7 @@ namespace Users.Managers.Features.TenantManagers.GetTenantManager;
 public record GetTenantManagersRequest(ManagerParams? Params = null);
 public record GetTenantManagersResponse(IEnumerable<ManagerDto> Managers, PaginationMetaData MetaData);
 
-public class GetTenantManagersEndpoint(ISender sender) : Endpoint<GetTenantManagersRequest, GetTenantManagersResponse>
+public class GetTenantManagersEndpoint(ISender sender,IClaimsPrincipalService claimsPrincipalService) : Endpoint<GetTenantManagersRequest, GetTenantManagersResponse>
 {
   public override void Configure()
   {
@@ -22,7 +23,8 @@ public class GetTenantManagersEndpoint(ISender sender) : Endpoint<GetTenantManag
 
   public override async Task HandleAsync(GetTenantManagersRequest request, CancellationToken ct)
   {
-    var query = new GetTenantManagersQuery(request.Params);
+    var tenantId = claimsPrincipalService.GetCurrentTenantId();
+    var query = new GetTenantManagersQuery(request.Params, tenantId);
     var result = await sender.Send(query, ct);
 
     await SendAsync(new GetTenantManagersResponse(result.Managers, result.MetaData), StatusCodes.Status200OK, ct);

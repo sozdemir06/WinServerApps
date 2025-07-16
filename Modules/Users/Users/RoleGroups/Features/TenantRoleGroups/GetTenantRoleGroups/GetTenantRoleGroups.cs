@@ -5,9 +5,9 @@ using Users.RoleGroups.QueryParams;
 
 namespace Users.RoleGroups.Features.TenantRoleGroups.GetTenantRoleGroups;
 
-public record GetTenantRoleGroupsQuery(RoleGroupParams? Parameters = null) : IQuery<GetTenantRoleGroupsResult>, ICachableRequest
+public record GetTenantRoleGroupsQuery(RoleGroupParams? Parameters = null, Guid? TenantId = null) : IQuery<GetTenantRoleGroupsResult>, ICachableRequest
 {
-  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.RoleGroups, Parameters ?? new RoleGroupParams());
+  public string CacheKey => CacheKeyGenerator.GenerateKey(CacheKeys.RoleGroups, Parameters ?? new RoleGroupParams(), TenantId!);
   public string CacheGroupKey => CacheKeys.RoleGroups;
   public TimeSpan? CacheExpiration => null;
 }
