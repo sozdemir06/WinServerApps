@@ -1,3 +1,4 @@
+using Accounting.ExpensePens.Models;
 using Accounting.Taxes.Models;
 using Accounting.TaxGroups.Models;
 using Shared.DDD;
@@ -21,6 +22,7 @@ public class AppTenant : Entity<Guid>
   public int MaxUserCount { get; private set; } = default!;
   public List<TenantTaxGroup> TenantTaxGroups { get; private set; } = [];
   public ICollection<TenantTax> TenantTaxes { get; private set; } = [];
+  public ICollection<TenantExpensePen> TenantExpensePens { get; private set; } = [];
 
   private AppTenant() { } // For EF Core
 

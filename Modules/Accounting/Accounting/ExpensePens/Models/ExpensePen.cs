@@ -1,5 +1,3 @@
-using Shared.DDD;
-
 namespace Accounting.ExpensePens.Models;
 
 public class ExpensePen : Aggregate<Guid>

@@ -14,6 +14,7 @@ public class Language : Entity<Guid>
   public bool IsActive { get; private set; }
 
   public ICollection<ExpensePenTranslate> ExpensePenTranslates { get; private set; } = [];
+  public ICollection<TenantExpensePenTranslate> TenantExpensePenTranslates { get; private set; } = [];
   public ICollection<TaxGroupTranslate> TaxGroupTranslates { get; private set; } = [];
   public ICollection<TaxTranslate> TaxTranslates { get; private set; } = [];
   public ICollection<TenantTaxGroupTranslate> TenantTaxGroupTranslates { get; private set; } = [];

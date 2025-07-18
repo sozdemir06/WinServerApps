@@ -3,6 +3,7 @@ using System;
 using Accounting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Accounting.Data.Migrations
 {
     [DbContext(typeof(AccountingDbContext))]
-    partial class AccountingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250718110606_AddTenantExpense")]
+    partial class AddTenantExpense
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,6 +273,9 @@ namespace Accounting.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("AppTenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -303,7 +309,7 @@ namespace Accounting.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId");
+                    b.HasIndex("AppTenantId");
 
                     b.ToTable("TenantExpensePens", "accounting");
                 });
@@ -851,10 +857,8 @@ namespace Accounting.Data.Migrations
             modelBuilder.Entity("Accounting.ExpensePens.Models.TenantExpensePen", b =>
                 {
                     b.HasOne("Accounting.AppTenants.Models.AppTenant", "AppTenant")
-                        .WithMany("TenantExpensePens")
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("AppTenantId");
 
                     b.Navigation("AppTenant");
                 });
@@ -994,8 +998,6 @@ namespace Accounting.Data.Migrations
 
             modelBuilder.Entity("Accounting.AppTenants.Models.AppTenant", b =>
                 {
-                    b.Navigation("TenantExpensePens");
-
                     b.Navigation("TenantTaxGroups");
 
                     b.Navigation("TenantTaxes");

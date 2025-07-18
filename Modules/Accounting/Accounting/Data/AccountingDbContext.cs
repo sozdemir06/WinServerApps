@@ -4,7 +4,6 @@ using Accounting.ExpensePens.Models;
 using Accounting.Languages.Models;
 using Accounting.Taxes.Models;
 using Accounting.TaxGroups.Models;
-using Shared.Services.Claims;
 
 
 namespace Accounting.Data;
@@ -17,6 +16,8 @@ public class AccountingDbContext(DbContextOptions<AccountingDbContext> options, 
   public DbSet<Currency> Currencies => Set<Currency>();
   public DbSet<ExpensePen> ExpensePens => Set<ExpensePen>();
   public DbSet<ExpensePenTranslate> ExpensePenTranslates => Set<ExpensePenTranslate>();
+  public DbSet<TenantExpensePen> TenantExpensePens => Set<TenantExpensePen>();
+  public DbSet<TenantExpensePenTranslate> TenantExpensePenTranslates => Set<TenantExpensePenTranslate>();
   public DbSet<TaxGroup> TaxGroups => Set<TaxGroup>();
   public DbSet<TaxGroupTranslate> TaxGroupTranslates => Set<TaxGroupTranslate>();
   public DbSet<Tax> Taxes => Set<Tax>();
@@ -35,6 +36,8 @@ public class AccountingDbContext(DbContextOptions<AccountingDbContext> options, 
 
     modelBuilder.Entity<ExpensePen>().HasQueryFilter(x => !x.IsDeleted);
     modelBuilder.Entity<ExpensePenTranslate>().HasQueryFilter(x => !x.IsDeleted);
+    modelBuilder.Entity<TenantExpensePen>().HasQueryFilter(x => !x.IsDeleted && x.TenantId == _tenantId);
+    modelBuilder.Entity<TenantExpensePenTranslate>().HasQueryFilter(x => !x.IsDeleted);
     modelBuilder.Entity<TaxGroup>().HasQueryFilter(x => !x.IsDeleted);
     modelBuilder.Entity<TaxGroupTranslate>().HasQueryFilter(x => !x.IsDeleted);
     modelBuilder.Entity<Tax>().HasQueryFilter(x => !x.IsDeleted);
