@@ -14,6 +14,7 @@ alwaysApply: true
 - Projemiz bir Moduler Monolith uygulaması..
 - Bootstraper/Api Başlangıç Projemiz.
 - Mudules/* Uygulama Modullerimiz burada yer almaktadır.
+- Her zaman primary constructor kullan
 
 
 # Modules Modullerin Yapısı

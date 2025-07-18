@@ -1,3 +1,5 @@
+using Accounting.Taxes.Models;
+using Accounting.TaxGroups.Models;
 using Shared.DDD;
 
 namespace Accounting.AppTenants.Models;
@@ -17,6 +19,8 @@ public class AppTenant : Entity<Guid>
   public DateTime? SubscriptionStartDate { get; private set; } = default!;
   public string? TenantType { get; private set; } = default!;
   public int MaxUserCount { get; private set; } = default!;
+  public List<TenantTaxGroup> TenantTaxGroups { get; private set; } = [];
+  public ICollection<TenantTax> TenantTaxes { get; private set; } = [];
 
   private AppTenant() { } // For EF Core
 

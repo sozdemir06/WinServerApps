@@ -24,6 +24,16 @@ public static class BranchExtensions
       query = query.Where(b => b.IsActive == parameters.IsActive.Value);
     }
 
+    if (!string.IsNullOrWhiteSpace(parameters.Name))
+    {
+      query = query.Where(b => b.Name.ToLower().Contains(parameters.Name.ToLower()));
+    }
+
+    if (!string.IsNullOrWhiteSpace(parameters.Code))
+    {
+      query = query.Where(b => b.Code.ToLower().Contains(parameters.Code.ToLower()));
+    }
+
     return query;
   }
 

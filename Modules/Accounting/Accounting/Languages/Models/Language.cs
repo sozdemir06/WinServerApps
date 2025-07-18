@@ -16,6 +16,8 @@ public class Language : Entity<Guid>
   public ICollection<ExpensePenTranslate> ExpensePenTranslates { get; private set; } = [];
   public ICollection<TaxGroupTranslate> TaxGroupTranslates { get; private set; } = [];
   public ICollection<TaxTranslate> TaxTranslates { get; private set; } = [];
+  public ICollection<TenantTaxGroupTranslate> TenantTaxGroupTranslates { get; private set; } = [];
+  public ICollection<TenantTaxTranslate> TenantTaxTranslates { get; private set; } = [];
 
   private Language() { } // For EF Core
 

@@ -24,3 +24,4 @@ global using Shared.Messages.Models;
 global using Shared.Pagination;
 global using Shared.Services.Caching;
 global using Shared.DDD;
+global using Shared.Services.Claims;

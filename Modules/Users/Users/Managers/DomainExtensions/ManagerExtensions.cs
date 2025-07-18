@@ -22,7 +22,7 @@ public static class ManagerExtensions
       manager.IsActive,
       manager.TenantId,
       manager.BranchId,
-      manager.CreatedAt
+      manager.CreatedAt 
     );
   }
 
@@ -90,66 +90,27 @@ public static class ManagerExtensions
       query = query.Where(m => m.IsActive == parameters.IsActive.Value);
     }
 
-    if (parameters.IsAdmin.HasValue)
-    {
-      query = query.Where(m => m.IsAdmin == parameters.IsAdmin.Value);
-    }
-
-    if (parameters.IsManager.HasValue)
-    {
-      query = query.Where(m => m.IsManager == parameters.IsManager.Value);
-    }
-
-    if (parameters.TenantId.HasValue)
-    {
-      query = query.Where(m => m.TenantId == parameters.TenantId.Value);
-    }
 
     if (parameters.BranchId.HasValue)
     {
       query = query.Where(m => m.BranchId == parameters.BranchId.Value);
     }
 
+    if (!string.IsNullOrWhiteSpace(parameters.Name))
+    {
+      
+      query = query.Where(m => m.FirstName.ToLower().Contains(parameters.Name.ToLower()) || m.LastName.ToLower().Contains(parameters.Name.ToLower()));
+    }
+
     return query;
   }
 
-  public static IQueryable<Manager> ApplySorting(this IQueryable<Manager> query, ManagerParams? parameters)
-  {
-    if (parameters?.SortBy == null)
-    {
-      return parameters?.IsDescending == true
-        ? query.OrderByDescending(m => m.CreatedAt)
-        : query.OrderBy(m => m.CreatedAt);
-    }
-
-    return parameters.SortBy.ToLowerInvariant() switch
-    {
-      "firstname" => parameters.IsDescending
-        ? query.OrderByDescending(m => m.FirstName)
-        : query.OrderBy(m => m.FirstName),
-      "lastname" => parameters.IsDescending
-        ? query.OrderByDescending(m => m.LastName)
-        : query.OrderBy(m => m.LastName),
-      "username" => parameters.IsDescending
-        ? query.OrderByDescending(m => m.UserName)
-        : query.OrderBy(m => m.UserName),
-      "email" => parameters.IsDescending
-        ? query.OrderByDescending(m => m.Email)
-        : query.OrderBy(m => m.Email),
-      "createdat" => parameters.IsDescending
-        ? query.OrderByDescending(m => m.CreatedAt)
-        : query.OrderBy(m => m.CreatedAt),
-      _ => parameters.IsDescending
-        ? query.OrderByDescending(m => m.CreatedAt)
-        : query.OrderBy(m => m.CreatedAt)
-    };
-  }
 
   public static IQueryable<Manager> ApplyQueryParams(this IQueryable<Manager> query, ManagerParams? parameters)
   {
     return query
       .ApplySearch(parameters?.Search)
-      .ApplyFilters(parameters)
-      .ApplySorting(parameters);
+      .ApplyFilters(parameters);
+     
   }
 }

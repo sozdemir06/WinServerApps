@@ -5,7 +5,7 @@ using Users.Managers.QueryParams;
 
 namespace Users.Managers.Features.TenantManagers.GetTenantManager;
 
-public record GetTenantManagersRequest(ManagerParams? Params = null);
+public record GetTenantManagersRequest():ManagerParams;
 public record GetTenantManagersResponse(IEnumerable<ManagerDto> Managers, PaginationMetaData MetaData);
 
 public class GetTenantManagersEndpoint(ISender sender,IClaimsPrincipalService claimsPrincipalService) : Endpoint<GetTenantManagersRequest, GetTenantManagersResponse>
@@ -24,7 +24,7 @@ public class GetTenantManagersEndpoint(ISender sender,IClaimsPrincipalService cl
   public override async Task HandleAsync(GetTenantManagersRequest request, CancellationToken ct)
   {
     var tenantId = claimsPrincipalService.GetCurrentTenantId();
-    var query = new GetTenantManagersQuery(request.Params, tenantId);
+    var query = new GetTenantManagersQuery(request, tenantId);
     var result = await sender.Send(query, ct);
 
     await SendAsync(new GetTenantManagersResponse(result.Managers, result.MetaData), StatusCodes.Status200OK, ct);
